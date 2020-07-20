@@ -13,23 +13,33 @@ const App = () => {
   const [showPersons, setShowPersons] = useState(false);
 
   const nameChangedHandler = ({ target }, id) => {
+    /* Get the index of the person you want to change */
     const personIndex = personState.persons.findIndex(person => {
       return person.id === id;
     });
+    /* Spread person to change into new variable */
     const person = { ...personState.persons[personIndex] };
+    /* Set the name to the incoming value */
     person.name = target.value;
+    /* Get the persons array and spread it into a new array */
     const persons = [...personState.persons];
+    /* Replace the instance of the persons array with what we just changed */
     persons[personIndex] = person;
+    /* Set the personState with the new persons array */
     setPersonState({ persons });
   };
 
   const deletePersonHandler = index => {
+    /* Spread persons into new variable */
     const persons = [...personState.persons];
+    /* Splice off the index we want to delete */
     persons.splice(index, 1);
+    /* Set the personState with the new persons array */
     setPersonState({ persons });
   };
 
   const togglePersonsHandler = () => {
+    /* Flip the showPersons variable on button press */
     setShowPersons(!showPersons);
   };
 
