@@ -8,7 +8,7 @@ const Person = ({ name, age, children, click, changed }) => {
         I'm a person, my name is {name}, my age is {age}
       </p>
       <p>and I am {children}</p>
-      <input type="text" onChange={changed} value={name} />
+      <input type="text" onChange={changed} placeholder={name} value={name} />
     </div>
   );
 };
