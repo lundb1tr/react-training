@@ -10,6 +10,7 @@ const App = () => {
       { name: 'Han', age: 28, description: 'a Smuggler' },
     ],
   });
+  const [showPersons, setShowPersons] = useState(false);
 
   const switchNameHandler = ({ newName }) => {
     setState({
@@ -31,38 +32,57 @@ const App = () => {
     });
   };
 
-  const style = {
-    backgroundColor: 'blue',
-    font: 'inherit',
-    border: '1px solid black',
-    padding: '8px',
-    cursor: 'pointer',
+  const togglePersonsHandler = () => {
+    setShowPersons(!showPersons);
   };
+
+  const style = {
+    buttonStyle: {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      borderRadius: '10px',
+      padding: '8px',
+      cursor: 'pointer',
+    },
+    infoStyle: {
+      margin: '10px 0',
+    },
+  };
+
+  let persons = null;
+
+  if (showPersons) {
+    persons = (
+      <div>
+        <Person name={state.persons[0].name} age={state.persons[0].age}>
+          {state.persons[0].description}
+        </Person>
+        <Person
+          name={state.persons[1].name}
+          age={state.persons[1].age}
+          click={() => switchNameHandler({ newName: 'T-Money' })}
+          changed={nameChangedHandler}
+        >
+          {state.persons[1].description}
+        </Person>
+        <Person name={state.persons[2].name} age={state.persons[2].age}>
+          {state.persons[2].description}
+        </Person>
+      </div>
+    );
+  } else {
+    persons = <div style={style.infoStyle}>People are hidden</div>;
+  }
 
   return (
     <div className="App">
       <h1>Boom goes the dynamite!</h1>
       <p>*Explosion*</p>
-      <button
-        style={style}
-        onClick={() => switchNameHandler({ newName: 'T-Dogg' })}
-      >
-        Switch Name
+      <button style={style.buttonStyle} onClick={togglePersonsHandler}>
+        Toggle Show Persons
       </button>
-      <Person name={state.persons[0].name} age={state.persons[0].age}>
-        {state.persons[0].description}
-      </Person>
-      <Person
-        name={state.persons[1].name}
-        age={state.persons[1].age}
-        click={() => switchNameHandler({ newName: 'T-Money' })}
-        changed={nameChangedHandler}
-      >
-        {state.persons[1].description}
-      </Person>
-      <Person name={state.persons[2].name} age={state.persons[2].age}>
-        {state.persons[2].description}
-      </Person>
+      {persons}
     </div>
   );
 };
