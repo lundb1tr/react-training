@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Person from './Person/Person';
 import './App.css';
 
-const App = props => {
-  const [personState, setPersonsState] = useState({
+const App = () => {
+  const [state, setState] = useState({
     persons: [
       { name: 'Tyler', age: 34, description: 'Awesome' },
       { name: 'Luke', age: 20, description: 'Whiney' },
@@ -11,41 +11,57 @@ const App = props => {
     ],
   });
 
-  const [otherState, setOtherState] = useState('some other state');
-
-  console.log(React);
-
-  const switchNameHandler = () => {
-    setPersonsState({
+  const switchNameHandler = ({ newName }) => {
+    setState({
       persons: [
-        { name: 'Tyler', age: 34, description: 'still Awesome' },
+        { name: newName, age: 34, description: 'still Awesome' },
         { name: 'Luke', age: 22, description: 'a Jedi' },
         { name: 'Han', age: 30, description: 'a Nerf Herder' },
       ],
     });
   };
+
+  const nameChangedHandler = ({ target }) => {
+    setState({
+      persons: [
+        { name: 'Tyler', age: 34, description: 'still Awesome' },
+        { name: target.value, age: 22, description: 'a Jedi' },
+        { name: 'Han', age: 30, description: 'a Nerf Herder' },
+      ],
+    });
+  };
+
+  const style = {
+    backgroundColor: 'blue',
+    font: 'inherit',
+    border: '1px solid black',
+    padding: '8px',
+    cursor: 'pointer',
+  };
+
   return (
     <div className="App">
       <h1>Boom goes the dynamite!</h1>
       <p>*Explosion*</p>
-      <button onClick={switchNameHandler}>Switch Name</button>
-      <Person
-        name={personState.persons[0].name}
-        age={personState.persons[0].age}
+      <button
+        style={style}
+        onClick={() => switchNameHandler({ newName: 'T-Dogg' })}
       >
-        {personState.persons[0].description}
+        Switch Name
+      </button>
+      <Person name={state.persons[0].name} age={state.persons[0].age}>
+        {state.persons[0].description}
       </Person>
       <Person
-        name={personState.persons[1].name}
-        age={personState.persons[1].age}
+        name={state.persons[1].name}
+        age={state.persons[1].age}
+        click={() => switchNameHandler({ newName: 'T-Money' })}
+        changed={nameChangedHandler}
       >
-        {personState.persons[1].description}
+        {state.persons[1].description}
       </Person>
-      <Person
-        name={personState.persons[2].name}
-        age={personState.persons[2].age}
-      >
-        {personState.persons[2].description}
+      <Person name={state.persons[2].name} age={state.persons[2].age}>
+        {state.persons[2].description}
       </Person>
     </div>
   );
