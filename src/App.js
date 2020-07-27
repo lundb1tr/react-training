@@ -45,7 +45,8 @@ const App = () => {
 
   const style = {
     buttonStyle: {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       borderRadius: '10px',
@@ -57,7 +58,7 @@ const App = () => {
     },
   };
 
-  let persons = null;
+  let persons = <div style={style.infoStyle}>People are hidden</div>;
 
   if (showPersons) {
     persons = (
@@ -77,14 +78,22 @@ const App = () => {
         })}
       </div>
     );
-  } else {
-    persons = <div style={style.infoStyle}>People are hidden</div>;
+
+    style.buttonStyle.backgroundColor = 'red';
+  }
+
+  const classes = [];
+  if (personState.length <= 2) {
+    classes.push('red');
+  }
+  if (personState.length <= 1) {
+    classes.push('bold');
   }
 
   return (
     <div className="App">
       <h1>Boom goes the dynamite!</h1>
-      <p>*Explosion*</p>
+      <p className={classes.join(' ')}>*Explosion*</p>
       <button style={style.buttonStyle} onClick={togglePersonsHandler}>
         Toggle Show Persons
       </button>
