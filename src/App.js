@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Person from './Person/Person';
 import styled from 'styled-components';
-import './App.css';
+import classes from './App.css';
 
 const StyledInfo = styled.div`
   margin: 10px 0;
@@ -70,19 +70,19 @@ const App = () => {
     );
   }
 
-  const classes = [];
+  const assignedClasses = [];
   if (personState.length <= 2) {
-    classes.push('red');
+    assignedClasses.push(classes.red);
   }
   if (personState.length <= 1) {
-    classes.push('bold');
+    assignedClasses.push(classes.bold);
   }
 
   return (
-    <div className="App">
+    <div className={classes.App}>
       <h1>Boom goes the dynamite!</h1>
-      <p className={classes.join(' ')}>*Explosion*</p>
-      <button className="button" onClick={togglePersonsHandler}>
+      <p className={assignedClasses.join(' ')}>*Explosion*</p>
+      <button className={classes.Button} onClick={togglePersonsHandler}>
         Toggle Show Persons
       </button>
       {persons}
