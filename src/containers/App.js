@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 import styled from 'styled-components';
-import classes from './App.css';
+import classes from '../containers/App.css';
 
 const StyledInfo = styled.div`
   margin: 10px 0;
