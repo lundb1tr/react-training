@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import Person from './Person/Person';
+import styled from 'styled-components';
 import './App.css';
+
+const StyledInfo = styled.div`
+  margin: 10px 0;
+`;
 
 const App = () => {
   const [personState, setPersonState] = useState({
@@ -43,22 +48,7 @@ const App = () => {
     setShowPersons(!showPersons);
   };
 
-  const style = {
-    buttonStyle: {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      borderRadius: '10px',
-      padding: '8px',
-      cursor: 'pointer',
-    },
-    infoStyle: {
-      margin: '10px 0',
-    },
-  };
-
-  let persons = <div style={style.infoStyle}>People are hidden</div>;
+  let persons = <StyledInfo>People are hidden</StyledInfo>;
 
   if (showPersons) {
     persons = (
@@ -78,8 +68,6 @@ const App = () => {
         })}
       </div>
     );
-
-    style.buttonStyle.backgroundColor = 'red';
   }
 
   const classes = [];
@@ -94,7 +82,7 @@ const App = () => {
     <div className="App">
       <h1>Boom goes the dynamite!</h1>
       <p className={classes.join(' ')}>*Explosion*</p>
-      <button style={style.buttonStyle} onClick={togglePersonsHandler}>
+      <button className="button" onClick={togglePersonsHandler}>
         Toggle Show Persons
       </button>
       {persons}
@@ -103,11 +91,3 @@ const App = () => {
 };
 
 export default App;
-
-// state = {
-//   persons: [
-//     { name: 'Tyler', age: 34, description: 'Awesome' },
-//     { name: 'Luke', age: 20, description: 'Whiney' },
-//     { name: 'Han', age: 28, description: 'a Smuggler' },
-//   ],
-// };
