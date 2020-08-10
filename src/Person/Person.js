@@ -17,7 +17,6 @@ const StyledDiv = styled.div`
 
 const Person = ({ name, age, children, click, changed }) => {
   return (
-    // <div className="Person">
     <StyledDiv>
       <p onClick={click}>
         I'm a person, my name is {name}, my age is {age}
@@ -25,7 +24,6 @@ const Person = ({ name, age, children, click, changed }) => {
       <p>and I am {children}</p>
       <input type="text" onChange={changed} placeholder={name} value={name} />
     </StyledDiv>
-    /* </div> */
   );
 };
 

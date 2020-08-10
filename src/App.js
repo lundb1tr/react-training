@@ -50,6 +50,8 @@ const App = () => {
 
   let persons = <StyledInfo>People are hidden</StyledInfo>;
 
+  let btnClass = '';
+
   if (showPersons) {
     persons = (
       <div>
@@ -68,6 +70,7 @@ const App = () => {
         })}
       </div>
     );
+    btnClass = classes.Red;
   }
 
   const assignedClasses = [];
@@ -78,11 +81,12 @@ const App = () => {
     assignedClasses.push(classes.bold);
   }
 
+
   return (
     <div className={classes.App}>
       <h1>Boom goes the dynamite!</h1>
       <p className={assignedClasses.join(' ')}>*Explosion*</p>
-      <button className={classes.Button} onClick={togglePersonsHandler}>
+      <button className={btnClass} onClick={togglePersonsHandler}>
         Toggle Show Persons
       </button>
       {persons}
