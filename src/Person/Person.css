@@ -8,3 +8,9 @@
   border-radius: 20px;
   margin-top: 15px;
 }
+
+@media (min-width: 500px) {
+  .Person {
+    width: 450px;
+  }
+}
