@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Person from './Person/Person';
 import styled from 'styled-components';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import classes from './App.css';
 
 const StyledInfo = styled.div`
@@ -57,15 +58,16 @@ const App = () => {
       <div>
         {personState.persons.map(({ id, name, age, description }, index) => {
           return (
-            <Person
-              key={id}
-              click={() => deletePersonHandler(index)}
-              name={name}
-              age={age}
-              changed={event => nameChangedHandler(event, id)}
-            >
-              {description}
-            </Person>
+            <ErrorBoundary key={id}>
+              <Person
+                click={() => deletePersonHandler(index)}
+                name={name}
+                age={age}
+                changed={event => nameChangedHandler(event, id)}
+              >
+                {description}
+              </Person>
+            </ErrorBoundary>
           );
         })}
       </div>
@@ -80,7 +82,6 @@ const App = () => {
   if (personState.length <= 1) {
     assignedClasses.push(classes.bold);
   }
-
 
   return (
     <div className={classes.App}>
