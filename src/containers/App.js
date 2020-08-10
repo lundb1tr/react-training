@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
 import styled from 'styled-components';
 import classes from '../containers/App.css';
 
@@ -55,19 +55,11 @@ const App = () => {
   if (showPersons) {
     persons = (
       <div>
-        {personState.persons.map(({ id, name, age, description }, index) => {
-          return (
-            <Person
-              key={id}
-              click={() => deletePersonHandler(index)}
-              name={name}
-              age={age}
-              changed={event => nameChangedHandler(event, id)}
-            >
-              {description}
-            </Person>
-          );
-        })}
+        <Persons
+          persons={personState.persons}
+          clicked={deletePersonHandler}
+          changed={nameChangedHandler}
+        />
       </div>
     );
     btnClass = classes.Red;
