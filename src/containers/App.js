@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Persons from '../components/Persons/Persons';
 import styled from 'styled-components';
 import Cockpit from '../components/Cockpit/Cockpit';
-import './App.css';
+import AppClass from './App.css';
 
 const StyledInfo = styled.div`
   margin: 10px 0;
@@ -62,7 +62,7 @@ const App = () => {
   }
 
   return (
-    <div className={App}>
+    <div className={AppClass.app}>
       <Cockpit
         showPersons={showPersons}
         persons={personState}
