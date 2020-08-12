@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Persons from '../components/Persons/Persons';
 import styled from 'styled-components';
-import classes from '../containers/App.css';
+import Cockpit from '../components/Cockpit/Cockpit';
+import './App.css';
 
 const StyledInfo = styled.div`
   margin: 10px 0;
@@ -10,7 +11,7 @@ const StyledInfo = styled.div`
 const App = () => {
   const [personState, setPersonState] = useState({
     persons: [
-      { id: '1234', name: 'Tyler', age: 34, description: 'Awesome' },
+      { id: '1234', name: 'Tyler', age: 35, description: 'Awesome' },
       { id: '5678', name: 'Luke', age: 20, description: 'Whiney' },
       { id: '90-=', name: 'Han', age: 28, description: 'a Smuggler' },
     ],
@@ -50,36 +51,23 @@ const App = () => {
 
   let persons = <StyledInfo>People are hidden</StyledInfo>;
 
-  let btnClass = '';
-
   if (showPersons) {
     persons = (
-      <div>
-        <Persons
-          persons={personState.persons}
-          clicked={deletePersonHandler}
-          changed={nameChangedHandler}
-        />
-      </div>
+      <Persons
+        persons={personState.persons}
+        clicked={deletePersonHandler}
+        changed={nameChangedHandler}
+      />
     );
-    btnClass = classes.Red;
-  }
-
-  const assignedClasses = [];
-  if (personState.length <= 2) {
-    assignedClasses.push(classes.red);
-  }
-  if (personState.length <= 1) {
-    assignedClasses.push(classes.bold);
   }
 
   return (
-    <div className={classes.App}>
-      <h1>Boom goes the dynamite!</h1>
-      <p className={assignedClasses.join(' ')}>*Explosion*</p>
-      <button className={btnClass} onClick={togglePersonsHandler}>
-        Toggle Show Persons
-      </button>
+    <div className={App}>
+      <Cockpit
+        showPersons={showPersons}
+        persons={personState}
+        clicked={togglePersonsHandler}
+      />
       {persons}
     </div>
   );
