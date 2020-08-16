@@ -2,6 +2,7 @@ import React from 'react';
 import { Person as PersonStyle } from './Person.css';
 
 const Person = ({ name, age, children, click, changed }) => {
+  console.log('[Person.js] render');
   return (
     <div className={PersonStyle}>
       <p onClick={click}>

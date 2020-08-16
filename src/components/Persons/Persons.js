@@ -2,6 +2,7 @@ import React from 'react';
 import Person from './Person/Person';
 
 const Persons = ({ persons, clicked, changed }) => {
+  console.log('[Persons.js] rendering...');
   return persons.map(({ id, name, age, description }, index) => {
     return (
       <Person
