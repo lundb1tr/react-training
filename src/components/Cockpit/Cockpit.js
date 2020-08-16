@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Cockpit.css';
 
-const Cockpit = ({ showPersons, persons, clicked }) => {
+const Cockpit = ({ showPersons, persons, clicked, title }) => {
   const assignedClasses = [];
   let btnClass = '';
   if (showPersons) {
@@ -15,7 +15,7 @@ const Cockpit = ({ showPersons, persons, clicked }) => {
   }
   return (
     <div className={classes.Cockpit}>
-      <h1>Boom goes the dynamite!</h1>
+      <h1>{title}</h1>
       <p className={assignedClasses.join(' ')}>*Explosion*</p>
       <button className={btnClass} onClick={clicked}>
         Toggle Show Persons
