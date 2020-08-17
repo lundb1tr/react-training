@@ -7,13 +7,15 @@ class Persons extends Component {
   //   return state;
   // }
 
+  /* Deprecated */
   // componentWillReceiveProps(props) {
   //   console.log('[Persons.js] componentWillReceiveProps', props);
   // }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate({ persons }, nextState) {
+    /* Use case, is my parent going to update and do I need to as well? */
     console.log('[Persons,js] shouldComponentUpdate');
-    return true;
+    return persons !== this.props.persons;
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
@@ -23,6 +25,10 @@ class Persons extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log('[Persons.js] componentDidUpdate', snapshot);
+  }
+
+  componentWillUnmount() {
+    console.log('[Persons.js] componentWillUnmount');
   }
 
   render() {

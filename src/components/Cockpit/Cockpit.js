@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.css';
 
-const Cockpit = ({ showPersons, persons, clicked, title }) => {
+const Cockpit = ({ showPersons, clicked, title, personsLength }) => {
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
+    /* Can be used like class based lifecycle hooks for updates such as http requests, etc */
+    /* Get derivedStateFromProps is not included in useEffect */
+    setTimeout(() => {
+      alert('Saved data to cloud');
+    }, 1000);
+    /* Empty array as second argument only runs on first render */
+    /* Array such as [persons] will rerun useEffect when persons changes */
+    return () => {
+      console.log('[Cockpit.js] cleanup work in useEffect');
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect');
+    return () => {
+      console.log('[Cockpit.js] cleanup work in 2nd useEffect');
+    };
+  });
   const assignedClasses = [];
   let btnClass = '';
   if (showPersons) {
     btnClass = classes.Red;
   }
-  if (persons.length <= 2) {
+  if (personsLength <= 2) {
     assignedClasses.push(classes.red);
   }
-  if (persons.length <= 1) {
+  if (personsLength <= 1) {
     assignedClasses.push(classes.bold);
   }
   return (
@@ -24,4 +44,5 @@ const Cockpit = ({ showPersons, persons, clicked, title }) => {
   );
 };
 
-export default Cockpit;
+/* Only re-renders if Cockpit changes, basically shouldComponentUpdate */
+export default React.memo(Cockpit);
