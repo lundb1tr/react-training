@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import AuthContext from '../../context/auth-context';
 import classes from './Cockpit.css';
 
-const Cockpit = ({ showPersons, clicked, title, personsLength }) => {
+const Cockpit = ({ showPersons, clicked, title, personsLength, login }) => {
+  /* Just like createRef in the class based component Person.js */
+  const toggleButtonRef = useRef(null);
+
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
     /* Can be used like class based lifecycle hooks for updates such as http requests, etc */
@@ -9,6 +13,8 @@ const Cockpit = ({ showPersons, clicked, title, personsLength }) => {
     // setTimeout(() => {
     //   alert('Saved data to cloud');
     // }, 1000);
+    /* Only runs .click() after the JSX is returned */
+    toggleButtonRef.current.click();
     /* Empty array as second argument only runs on first render */
     /* Array such as [persons] will rerun useEffect when persons changes */
     return () => {
@@ -37,9 +43,16 @@ const Cockpit = ({ showPersons, clicked, title, personsLength }) => {
     <div className={classes.Cockpit}>
       <h1>{title}</h1>
       <p className={assignedClasses.join(' ')}>*Explosion*</p>
-      <button className={btnClass} onClick={clicked}>
+      <button ref={toggleButtonRef} className={btnClass} onClick={clicked}>
         Toggle Show Persons
       </button>
+      <AuthContext.Consumer>
+        {({ authenticated, login }) => (
+          <button onClick={login}>
+            {authenticated ? 'Log out' : 'Log in'}
+          </button>
+        )}
+      </AuthContext.Consumer>
     </div>
   );
 };

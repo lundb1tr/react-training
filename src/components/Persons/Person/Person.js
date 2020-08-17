@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Person as PersonStyle } from './Person.css';
 import Aux from '../../../hoc/Auxiliary';
 import withClass from '../../../hoc/withClass';
+import AuthContext from '../../../context/auth-context';
 
 class Person extends Component {
   constructor(props) {
@@ -13,8 +14,8 @@ class Person extends Component {
     /* Selects the first found input box */
     //   document.querySelector('input').focus();
     /* Selects last item in list */
-    // this.inputElement.focus();
-    /* Gets current reference */
+    //   this.inputElement.focus();
+    /* Gets current reference, when mounted it focuses the last element */
     this.inputElementRef.current.focus();
   }
 
@@ -22,6 +23,11 @@ class Person extends Component {
     console.log('[Person.js] rendering...');
     return (
       <Aux>
+        <AuthContext.Consumer>
+          {({ authenticated }) =>
+            authenticated ? <p>Authenticated!</p> : <p>Please log in</p>
+          }
+        </AuthContext.Consumer>
         <p onClick={this.props.click}>
           I'm a person, my name is {this.props.name}, my age is {this.props.age}
         </p>
