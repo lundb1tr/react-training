@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Person as PersonStyle } from './Person.css';
 import Aux from '../../hoc/Auxiliary';
 
@@ -6,7 +6,7 @@ class Person extends Component {
   render() {
     console.log('[Person.js] rendering...');
     return (
-      <Fragment>
+      <Aux className={PersonStyle.Person}>
         <p onClick={this.props.click}>
           I'm a person, my name is {this.props.name}, my age is {this.props.age}
         </p>
@@ -17,7 +17,7 @@ class Person extends Component {
           placeholder={this.props.name}
           value={this.props.name}
         />
-      </Fragment>
+      </Aux>
     );
   }
 }
