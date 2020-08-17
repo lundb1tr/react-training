@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from './Person/Person';
 
-class Persons extends Component {
+/* PureComponent is a normal component that runs shouldComponentUpdate with a complete props check */
+class Persons extends PureComponent {
   // static getDerivedStateFromProps(props, state) {
   //   console.log('[Persons.js] getDerivedStateFromProps');
   //   return state;
@@ -12,11 +13,16 @@ class Persons extends Component {
   //   console.log('[Persons.js] componentWillReceiveProps', props);
   // }
 
-  shouldComponentUpdate({ persons }, nextState) {
-    /* Use case, is my parent going to update and do I need to as well? */
-    console.log('[Persons,js] shouldComponentUpdate');
-    return persons !== this.props.persons;
-  }
+  /* Unnecessary in PureComponent */
+  // shouldComponentUpdate({ persons, changed, clicked }, nextState) {
+  //   /* Use case, is my parent going to update and do I need to as well? */
+  //   console.log('[Persons,js] shouldComponentUpdate');
+  //   return (
+  //     persons !== this.props.persons ||
+  //     changed !== this.props.changed ||
+  //     clicked !== this.props.clicked
+  //   );
+  // }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('[Persons.js] getSnapshotBeforeUpdate');
@@ -31,6 +37,7 @@ class Persons extends Component {
     console.log('[Persons.js] componentWillUnmount');
   }
 
+  /* Doesn't immediately update the 'real' DOM.  If differences are found it updates the 'real' DOM and if no differences are found it does not re-render the 'real' DOM */
   render() {
     console.log('[Persons.js] rendering...');
     return this.props.persons.map(({ id, name, age, description }, index) => {
