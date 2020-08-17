@@ -6,9 +6,9 @@ const Cockpit = ({ showPersons, clicked, title, personsLength }) => {
     console.log('[Cockpit.js] useEffect');
     /* Can be used like class based lifecycle hooks for updates such as http requests, etc */
     /* Get derivedStateFromProps is not included in useEffect */
-    setTimeout(() => {
-      alert('Saved data to cloud');
-    }, 1000);
+    // setTimeout(() => {
+    //   alert('Saved data to cloud');
+    // }, 1000);
     /* Empty array as second argument only runs on first render */
     /* Array such as [persons] will rerun useEffect when persons changes */
     return () => {

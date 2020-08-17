@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Person as PersonStyle } from './Person.css';
-import Aux from '../../hoc/Auxiliary';
+import Aux from '../../../hoc/Auxiliary';
+import withClass from '../../../hoc/withClass';
 
 class Person extends Component {
   render() {
-    console.log('[Person.js] rendering...');
+    console.log('[Person.js] rendering...', PersonStyle);
     return (
-      <Aux className={PersonStyle.Person}>
+      <Aux>
         <p onClick={this.props.click}>
           I'm a person, my name is {this.props.name}, my age is {this.props.age}
         </p>
@@ -22,4 +23,4 @@ class Person extends Component {
   }
 }
 
-export default Person;
+export default withClass(Person, PersonStyle);
